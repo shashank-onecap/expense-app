@@ -11,6 +11,13 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
 
+    <!-- RECEIVE_SMS/READ_SMS otherwise imply this feature as required, which
+         excludes every device with no cellular radio (tablets, Chromebooks,
+         Wear/TV) from the Play listing entirely. The app already falls back
+         to manual entry when SMS access isn't available (see SettingsScreen's
+         "you chose to add expenses by hand instead" copy), so it's optional. -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
     <application
         android:name=".CostiqApplication"
         android:allowBackup="false"
