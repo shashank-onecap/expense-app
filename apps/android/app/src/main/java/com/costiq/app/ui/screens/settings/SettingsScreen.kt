@@ -36,9 +36,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.costiq.app.BuildConfig
 import com.costiq.app.ui.components.CostiqCard
 import com.costiq.app.ui.components.iconFor
 import com.costiq.app.ui.theme.CostiqTheme
@@ -51,6 +53,7 @@ import com.costiq.app.ui.theme.Vermilion
 fun SettingsScreen(onBack: () -> Unit) {
     val viewModel: SettingsViewModel = hiltViewModel()
     val context = LocalContext.current
+    val uriHandler = LocalUriHandler.current
     val captureEnabled by viewModel.smsCaptureEnabled.collectAsState()
 
     var hasPermission by remember {
@@ -128,6 +131,19 @@ fun SettingsScreen(onBack: () -> Unit) {
                             color = CostiqTheme.extendedColors.textMuted,
                         )
                     }
+                }
+            }
+
+            CostiqCard {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uriHandler.openUri("${BuildConfig.WEB_BASE_URL.trimEnd('/')}/dashboard") },
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(iconFor("layout-dashboard"), contentDescription = null, tint = CostiqTheme.extendedColors.textMuted, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(13.dp))
+                    Text("Open web dashboard", style = MaterialTheme.typography.bodyMedium, color = Ink)
                 }
             }
 

@@ -77,11 +77,14 @@ android {
             // the emulator. Override in local.properties for a physical
             // device on the same LAN, e.g. API_BASE_URL=http://192.168.1.23:8787
             buildConfigField("String", "API_BASE_URL", "\"${localProp("API_BASE_URL", "http://10.0.2.2:8787")}\"")
+            // Web dashboard (apps/web, `next dev -p 3003`), opened in the device browser.
+            buildConfigField("String", "WEB_BASE_URL", "\"${localProp("WEB_BASE_URL", "http://10.0.2.2:3003")}\"")
         }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "API_BASE_URL", "\"${localProp("API_BASE_URL_RELEASE", "https://api.costiq.app")}\"")
+            buildConfigField("String", "WEB_BASE_URL", "\"${localProp("WEB_BASE_URL_RELEASE", "https://expense-app-web-woad.vercel.app")}\"")
             if (localProp("RELEASE_STORE_FILE", "").isNotBlank()) {
                 signingConfig = signingConfigs.getByName("release")
             }

@@ -16,3 +16,8 @@ SUPABASE_ANON_KEY=
 # Emulator against a worker running on your host machine (`pnpm worker`):
 API_BASE_URL=http://10.0.2.2:8787
 # Physical device on the same LAN instead: http://<your-machine-lan-ip>:8787
+
+# Web dashboard (apps/web) opened from Settings → "Open web dashboard".
+# Emulator against `pnpm --filter web dev` on the host:
+WEB_BASE_URL=http://10.0.2.2:3003
+# Release builds use WEB_BASE_URL_RELEASE (default https://expense-app-web-woad.vercel.app).
